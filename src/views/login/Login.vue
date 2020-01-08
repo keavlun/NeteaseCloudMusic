@@ -28,17 +28,8 @@
         <i class="view" v-if="isShow">&#xe6f6;</i>
         <i class="view" v-else>&#xe671;</i>
       </div>
-      <!-- <i class="view">{{icon}}</i> -->
-      <!-- <van-number-keyboard
-        :show="show"
-        theme="custom"
-        extra-key="."
-        close-button-text="完成"
-        @blur="show = false"
-        @input="onInput"
-        @delete="onDelete"
-        @close="onClose"
-      /> -->
+     
+      
 
       <van-button class="btn-login" round color="#C30F18" size="large" @click="loginClick">点击登录</van-button>
     </div>
@@ -124,24 +115,9 @@ export default {
       if (this.isShow) {
         this.inputType = "password";
       } else {
-        this.inputType = "tel";
+        this.inputType = "text";
       }
-
-      console.log(this.inputType);
     },
-    // onInput(value) {
-    //   const newValue = String(value);
-    //   this.userInfo.phone += newValue;
-    // },
-    // onDelete() {
-    //   this.userInfo.phone = this.userInfo.phone.slice(
-    //     0,
-    //     this.userInfo.phone.length - 1
-    //   );
-    // },
-    // onClose(){
-    //   // document.getElementById("pwd").focus();
-    // }
   },
   //TODO:使用正则表达式验证手机号和密码的格式----------------------------------------------    |思路：vant 上的属性是props 属性前面加：里面的值写到data中，然后再对data中的值进行操作     |   |_______________________________________________________________________________|
 
@@ -151,9 +127,9 @@ export default {
       return TEL_REGEXP.test(this.userInfo.phone);
     }
   },
-  // mounted() {
-  //   document.getElementById("ipt").focus();
-  // }
+  mounted() {
+    document.getElementById("ipt").focus();
+  }
 };
 </script>
 
