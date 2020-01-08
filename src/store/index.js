@@ -11,7 +11,7 @@ export default new Vuex.Store({
     status: '',
     // token: localStorage.getItem('token') || '',
     // user: {}
-
+    code:null
   },
   mutations: {
     auth_request(state) {
@@ -27,6 +27,13 @@ export default new Vuex.Store({
       state.status = '';
       state.token = '';
     },
+    register(state,res){
+      if(res.code == 502 || res.code == 200){
+        state.code = res.code
+      }else if(res.code == undefined){
+        state.code = 101
+      }
+    }
   },
   actions: {
     Login({commit}, user){
@@ -34,12 +41,17 @@ export default new Vuex.Store({
         commit('auth_request')
         phoneLogin(user.phone, user.password)
         .then(res =>{
-          console.log(res.token);
+          console.log(res);
           commit('auth_success')
           resolve(res)
+          commit('register',res)
+          
+
         })
         .catch(err => {
           commit('auth_error')
+          commit('register',err)
+
         })
       })
     }
